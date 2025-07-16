@@ -1,10 +1,10 @@
 # 🏁 Tugas Akhir (TA) - Final Project
 
-**Nama Mahasiswa**: [Nama Lengkap]  
-**NRP**: [Nomor Registrasi Pokok]  
-**Judul TA**: [Judul Tugas Akhir]  
-**Dosen Pembimbing**: [Nama Dosen]  
-**Dosen Ko-pembimbing**: [Nama Dosen]
+**Nama Mahasiswa**: Darren Prasetya
+**NRP**: 5025211162
+**Judul TA**: PERBANDINGAN KINERJA SISTEM TANYA JAWAB HUKUM INDONESIA DENGAN LLM OPEN-SOURCE BERBASIS RAG
+**Dosen Pembimbing**: Dini Adni Navastara, S.Kom., M.Sc.
+**Dosen Ko-pembimbing**: Prof. Dr. Ir. Diana Purwitasari, S.Kom., M.Sc.
 
 ---
 
@@ -71,5 +71,5 @@ Pastikan proyek memenuhi kriteria berikut sebelum submit:
 ## ⁉️ Pertanyaan?
 
 Hubungi:
-- Penulis: [email@mahasiswa]
-- Pembimbing Utama: [email@pembimbing]
+- Penulis: 5025211162@student.its.ac.id
+- Pembimbing Utama: dini_navastara@if.its.ac.id
