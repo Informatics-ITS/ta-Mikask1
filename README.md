@@ -1,10 +1,10 @@
 # 🏁 Tugas Akhir (TA) - Final Project
 
-**Nama Mahasiswa**: Darren Prasetya
-**NRP**: 5025211162
-**Judul TA**: PERBANDINGAN KINERJA SISTEM TANYA JAWAB HUKUM INDONESIA DENGAN LLM OPEN-SOURCE BERBASIS RAG
-**Dosen Pembimbing**: Dini Adni Navastara, S.Kom., M.Sc.
-**Dosen Ko-pembimbing**: Prof. Dr. Ir. Diana Purwitasari, S.Kom., M.Sc.
+**Nama Mahasiswa**: Darren Prasetya<br/>
+**NRP**: 5025211162<br/>
+**Judul TA**: PERBANDINGAN KINERJA SISTEM TANYA JAWAB HUKUM INDONESIA DENGAN LLM OPEN-SOURCE BERBASIS RAG<br/>
+**Dosen Pembimbing**: Dini Adni Navastara, S.Kom., M.Sc.<br/>
+**Dosen Ko-pembimbing**: Prof. Dr. Ir. Diana Purwitasari, S.Kom., M.Sc.<br/>
 
 ---
 
