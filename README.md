@@ -62,7 +62,7 @@ Embed video demo di bawah ini (ganti `VIDEO_ID` dengan ID video YouTube Anda):
    ```bash
    streamlit run app.py
    ```
-5. Buka browser dan kunjungi: `http://localhost:3000` (sesuaikan dengan port proyek Anda)
+5. Buka browser dan kunjungi: `http://localhost:8501`
 
 ### Langkah-langkah update Knowledge Base
 1. **Clone Repository**  
