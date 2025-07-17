@@ -16,56 +16,74 @@ Embed video demo di bawah ini (ganti `VIDEO_ID` dengan ID video YouTube Anda):
 
 ---
 
-*Konten selanjutnya hanya merupakan contoh awalan yang baik. Anda dapat berimprovisasi bila diperlukan.*
-
 ## 🛠 Panduan Instalasi & Menjalankan Software  
 
 ### Prasyarat  
 - Daftar dependensi (contoh):
-  - Python 3.10+
-  - Node.js v18+
-  - MySQL 8.0
-  - [Lainnya...]
+   - Python 3.10
+   - pandas
+   - python-dotenv
+   - transformers
+   - accelerate
+   - langchain
+   - typing_extensions
+   - pydantic
+   - langgraph
+   - langchain-huggingface
+   - langchain_community
+   - sentence-transformers
+   - tavily-python
+   - pinecone
+   - pinecone-client
+   - requests
+   - tqdm
+   - pymupdf4llm
+   - beautifulsoup4
+   - streamlit
+   - numpy 1.26.2
 
-### Langkah-langkah  
+### Langkah-langkah menggunakan model
 1. **Clone Repository**  
    ```bash
-   git clone https://github.com/Informatics-ITS/TA.git
+   git clone https://github.com/Informatics-ITS/ta-Mikask1
    ```
 2. **Instalasi Dependensi**
    ```bash
    cd [folder-proyek]
-   pip install -r requirements.txt  # Contoh untuk Python
-   npm install  # Contoh untuk Node.js
+   python -m venv venv
+   ./venv/Scripts/activate
+   pip install -r requirements.txt
    ```
 3. **Konfigurasi**
 - Salin/rename file .env.example menjadi .env
-- Isi variabel lingkungan sesuai kebutuhan (database, API key, dll.)
+- Isi variabel lingkungan
+- Pada app.py, tentukan model yang digunakan dengan mengubah MODEL_NAME
 4. **Jalankan Aplikasi**
    ```bash
-   python main.py  # Contoh untuk Python
-   npm start      # Contoh untuk Node.js
+   streamlit run app.py
    ```
 5. Buka browser dan kunjungi: `http://localhost:3000` (sesuaikan dengan port proyek Anda)
 
----
-
-## 📚 Dokumentasi Tambahan
-
-- [![Dokumentasi API]](docs/api.md)
-- [![Diagram Arsitektur]](docs/architecture.png)
-- [![Struktur Basis Data]](docs/database_schema.sql)
-
----
-
-## ✅ Validasi
-
-Pastikan proyek memenuhi kriteria berikut sebelum submit:
-- Source code dapat di-build/run tanpa error
-- Video demo jelas menampilkan fitur utama
-- README lengkap dan terupdate
-- Tidak ada data sensitif (password, API key) yang ter-expose
-
+### Langkah-langkah update Knowledge Base
+1. **Clone Repository**  
+   ```bash
+   git clone https://github.com/Informatics-ITS/ta-Mikask1
+   ```
+2. **Instalasi Dependensi**
+   ```bash
+   cd [folder-proyek]
+   python -m venv venv
+   ./venv/Scripts/activate
+   pip install -r requirements.txt
+   ```
+3. **Konfigurasi**
+- Salin/rename file .env.example menjadi .env
+- Isi variabel lingkungan
+4. **Jalankan Update Script**
+   ```bash
+   cd "Update KB"
+   python main.py
+   ```
 ---
 
 ## ⁉️ Pertanyaan?
