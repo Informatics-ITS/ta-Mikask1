@@ -19,7 +19,7 @@ Embed video demo di bawah ini (ganti `VIDEO_ID` dengan ID video YouTube Anda):
 ## 🛠 Panduan Instalasi & Menjalankan Software  
 
 ### Prasyarat  
-- Daftar dependensi (contoh):
+- Daftar dependensi:
    - Python 3.10
    - pandas
    - python-dotenv
