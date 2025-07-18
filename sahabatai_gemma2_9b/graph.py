@@ -20,12 +20,13 @@ CHUNK_FOLDER = r"chunks"
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 START_INDEX = 0
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 pipeline = transformers.pipeline(
     "text-generation",
     model=MODEL_ID,
     model_kwargs={"torch_dtype": torch.bfloat16},
-    device_map="cuda"
+    device_map=DEVICE
 )
 
 terminators = [
@@ -33,7 +34,7 @@ terminators = [
     pipeline.tokenizer.convert_tokens_to_ids("<|eot_id|>")
 ]
 
-embedding_model = SentenceTransformer('intfloat/multilingual-e5-large-instruct', device="cuda")
+embedding_model = SentenceTransformer('intfloat/multilingual-e5-large-instruct', device=DEVICE)
 pc = Pinecone(api_key=PINECONE_API_KEY)
 index = pc.Index("uu-index")
 tavily = TavilyClient(api_key=TAVILY_API_KEY)

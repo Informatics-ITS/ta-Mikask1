@@ -18,12 +18,13 @@ CHUNK_FOLDER = r"chunks"
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 START_INDEX = 0
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 pipeline = transformers.pipeline(
     "text-generation",
     model=MODEL_ID,
     model_kwargs={"torch_dtype": torch.bfloat16},
-    device_map="cuda"
+    device_map=DEVICE
 )
 
 terminators = [
@@ -31,7 +32,7 @@ terminators = [
     pipeline.tokenizer.convert_tokens_to_ids("<|eot_id|>")
 ]
 
-embedding_model = SentenceTransformer('intfloat/multilingual-e5-large-instruct', device="cuda")
+embedding_model = SentenceTransformer('intfloat/multilingual-e5-large-instruct', device=DEVICE)
 pc = Pinecone(api_key=PINECONE_API_KEY)
 index = pc.Index("uu-index")
 tavily = TavilyClient(api_key=TAVILY_API_KEY)
@@ -47,6 +48,8 @@ class AgentState(TypedDict):
     used_web_search: bool
 
 def llm(messages):
+    print("GENERATING ANSWER")
+
     outputs = pipeline(
         messages,
         max_new_tokens=512,
@@ -54,7 +57,7 @@ def llm(messages):
     )
     
     return outputs[0]["generated_text"][-1]['content']
-
+    
 def cleanup_answer(text):
     text = text.strip()
     last_period_index = text.rfind(".")
@@ -66,6 +69,7 @@ def cleanup_answer(text):
     return text.replace("\n", " ")
 
 def retrieve_documents(state: AgentState) -> AgentState:
+    print("RETRIEVING DOCUMENTS")
     query = state["question"]
     query_vector = embedding_model.encode(query).tolist()
 
@@ -90,6 +94,7 @@ def retrieve_documents(state: AgentState) -> AgentState:
     return {"docs": docs, "filenames": filenames}
 
 def generate_answer(state: AgentState) -> AgentState:
+    print("GENERATING ANSWER")
     question = state["question"]
     docs = state["docs"]
 
@@ -105,6 +110,7 @@ def generate_answer(state: AgentState) -> AgentState:
     return {"answer": answer}
 
 def judge_answer(state: AgentState) -> AgentState:
+    print("JUDGING ANSWER")
     question = state["question"]
     answer = state["answer"]
 
@@ -125,6 +131,7 @@ def judge_answer(state: AgentState) -> AgentState:
             }}
 
 def search_web(state: AgentState) -> AgentState:
+    print("SEARCHING WEB")
     try:
         search_results = tavily.search(
             query=state["question"],
@@ -150,6 +157,7 @@ def search_web(state: AgentState) -> AgentState:
         return {"web_search_results": "Tidak ada hasil pencarian web yang ditemukan"}
 
 def generate_final_answer(state: AgentState) -> AgentState:
+    print("GENERATING FINAL ANSWER")
     question = state["question"]
     docs_answer = state["answer"]
     web_results = state.get("web_search_results", "")
@@ -164,6 +172,7 @@ def generate_final_answer(state: AgentState) -> AgentState:
     return {"final_answer": final_answer}
 
 def should_search_web(state: AgentState) -> str:
+    print("CHECKING IF WEB SEARCH IS NEEDED")
     feedback = state["feedback"]
 
     is_sufficient = feedback.get("is_sufficient", False)
@@ -199,6 +208,7 @@ def create_workflow():
     return workflow.compile()
 
 def run_agent(question: str) -> str:
+    print("RUNNING AGENT")
     agent_executor = create_workflow()
     result = agent_executor.invoke(
         {"question": question, "used_web_search": False})

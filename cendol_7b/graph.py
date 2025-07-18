@@ -8,12 +8,13 @@ from langgraph.graph import StateGraph, START, END
 from pinecone import Pinecone
 from sentence_transformers import SentenceTransformer
 from tavily import TavilyClient
+import torch
 
 # Load environment variables
 load_dotenv()
 
 # Constants
-DEVICE = "cuda:0"
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 CHUNK_FOLDER = r"chunks"
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
@@ -27,7 +28,7 @@ pipeline = pipeline("text-generation", model=model, tokenizer=tokenizer,
                     pad_token_id=tokenizer.eos_token_id, repetition_penalty=1.1, max_new_tokens=1024)
 
 embedding_model = SentenceTransformer(
-    'intfloat/multilingual-e5-large-instruct', device="cuda")
+    'intfloat/multilingual-e5-large-instruct', device=DEVICE)
 pc = Pinecone(api_key=PINECONE_API_KEY)
 index = pc.Index("uu-index")
 tavily = TavilyClient(api_key=TAVILY_API_KEY)

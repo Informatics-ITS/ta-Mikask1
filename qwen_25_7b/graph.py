@@ -22,16 +22,17 @@ CHUNK_FOLDER = r"chunks"
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 START_INDEX = 0
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_NAME,
     torch_dtype="auto",
-    device_map="auto"
+    device_map=DEVICE
 )
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 
 embedding_model = SentenceTransformer(
-    'intfloat/multilingual-e5-large-instruct', device="cuda")
+    'intfloat/multilingual-e5-large-instruct', device=DEVICE)
 pc = Pinecone(api_key=PINECONE_API_KEY)
 index = pc.Index("uu-index")
 tavily = TavilyClient(api_key=TAVILY_API_KEY)
